@@ -13,7 +13,10 @@ class Project(models.Model):
     learning = RichTextField()
     author = models.ForeignKey(User,on_delete=models.PROTECT)
     programming_languages = TaggableManager()
-    created_at = models.DateField()
+    created_at = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        ordering = ('-created_at',)
