@@ -28,7 +28,7 @@
             <!-- Post preview-->
             {% for project in projects %}
             <div class="post-preview">
-                <a href="post.html">
+                <a href="/project/{{project.pk}}">
                     <h2 class="post-title">{{project.title}}</h2>
                     <h3 class="post-subtitle">{{project.summary|safe}}</h3>
                 </a>

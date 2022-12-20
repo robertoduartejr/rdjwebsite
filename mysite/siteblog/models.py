@@ -12,6 +12,9 @@ class Project(models.Model):
     content = RichTextUploadingField()
     learning = RichTextField()
     author = models.ForeignKey(User,on_delete=models.PROTECT)
+    repository = models.URLField()
+    deploy = models.URLField()
+    cover = models.ImageField()
     programming_languages = TaggableManager()
     created_at = models.DateField(auto_now_add=True)
 
