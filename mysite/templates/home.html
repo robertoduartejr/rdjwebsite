@@ -4,13 +4,14 @@
 {% block sub_header %}
 
 <!-- Page Header-->
-<header class="masthead" style="background-image: url('{% static "assets/img/home-bg.jpg" %}')">
+<header class="masthead" style="background-image: url('{% static "assets/img/homecover.png" %}')">
     <div class="container position-relative px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="site-heading">
                     <h1>Roberto Duarte Junior Website</h1>
-                    <span class="subheading">Projetos de Programação</span>
+                    <span class="subheading">Desenvolvedor Full-Stack Python</span>
+                    
                 </div>
             </div>
         </div>
@@ -26,9 +27,13 @@
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
             <!-- Post preview-->
+            {% for mt in common_tags %}
+            <a class="post-meta" href="{% url 'tagged' mt.slug  %}"> #{{mt}}</a>
+                    {% endfor %}
+            
             {% for project in projects %}
             <div class="post-preview">
-                <a href="/project/{{project.pk}}">
+                <a href="/project/{{project.slug}}">
                     <h2 class="post-title">{{project.title}}</h2>
                     <h3 class="post-subtitle">{{project.summary|safe}}</h3>
                 </a>
@@ -37,6 +42,9 @@
                     <a href="about.html">Roberto Duarte</a>
                     {{project.created_at|date:'d, M Y'}}
                 </p>
+                {% for tag in project.tags.all %}
+                    <a class="post-meta" href="{% url 'tagged' tag.slug  %}"> #{{tag}}</a>
+                    {%endfor%}
             </div>
             <!-- Divider-->
             <hr class="my-4" />

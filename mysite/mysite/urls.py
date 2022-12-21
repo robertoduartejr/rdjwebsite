@@ -24,5 +24,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('',views.home),
-    path('project/<int:pk>',views.project)
+    path('project/<slug:slug>',views.project),
+    path('tag/<slug:slug>/',views.tagged,name="tagged"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

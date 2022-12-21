@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
 from taggit.managers import TaggableManager
+from datetime import date
+from django_extensions.db.fields import AutoSlugField
 
 # Create your models here.
 
@@ -15,8 +17,9 @@ class Project(models.Model):
     repository = models.URLField()
     deploy = models.URLField()
     cover = models.ImageField()
-    programming_languages = TaggableManager()
-    created_at = models.DateField(auto_now_add=True)
+    tags = TaggableManager()
+    slug = AutoSlugField(null=True,unique=True, max_length=100,default=None,populate_from='title')
+    created_at = models.DateField(default=date.today())
 
     def __str__(self):
         return self.title
