@@ -5,6 +5,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from taggit.managers import TaggableManager
 from datetime import date
 from django_extensions.db.fields import AutoSlugField
+from django.conf import settings
 
 # Create your models here.
 
@@ -26,3 +27,8 @@ class Project(models.Model):
 
     class Meta:
         ordering = ('-created_at',)
+
+class VisitorsPost(models.Model):
+    content = models.TextField(max_length=1000)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, null=True)
