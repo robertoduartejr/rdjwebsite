@@ -27,3 +27,12 @@ window.addEventListener('DOMContentLoaded', () => {
         scrollPos = currentTop;
     });
 })
+
+function DownPage() { 
+    divElement = document.querySelector(".container px-4 px-lg-5");
+      
+    elemHeight = divElement.offsetHeight;
+
+    window.scrollTo(0, document.body.scrollHeight);
+}
+

@@ -23,7 +23,9 @@ from siteblog import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls')),
-    path('',views.home),
+    path('',views.home,name='home'),
+    path('all_projects',views.all_projects,name='all'),
     path('project/<slug:slug>',views.project),
     path('tag/<slug:slug>/',views.tagged,name="tagged"),
+    path('accounts/', include('allauth.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

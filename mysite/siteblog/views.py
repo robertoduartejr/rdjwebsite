@@ -5,10 +5,16 @@ from django.template.defaultfilters import slugify
 
 # Create your views here.
 def home(request):
+    projects = Project.objects.all()[:3]
+    common_tags = Project.tags.most_common()[:4]
+
+    return render(request, 'home.html', {'projects':projects,'common_tags': common_tags, 'hide':True})
+
+def all_projects(request):
     projects = Project.objects.all()
     common_tags = Project.tags.most_common()[:4]
 
-    return render(request, 'home.html', {'projects':projects,'common_tags': common_tags})
+    return render(request, 'home.html', {'projects':projects,'common_tags': common_tags, 'hide':False})
 
 def project(request, slug):
     project = Project.objects.get(slug=slug)
