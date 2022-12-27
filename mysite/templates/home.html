@@ -53,16 +53,24 @@
 
             {% endfor %}
 
-            <!-- Divider-->
-            <hr class="my-4" />
+
             <!-- Pager-->
             {% if hide%}
             <div class="d-flex justify-content-center mb-4"><a class="btn btn-primary text-uppercase" href="{% url 'all'  %}">Todos Projetos ↓</a></div>
             {% else %}
             <div class="d-flex justify-content-center mb-4"><a class="btn btn-primary text-uppercase" href="{% url 'home'  %}">Projetos Recentes ↑</a></div>
             {%endif%}
+
+
+
+
         </div>
     </div>
 </div>
+{% include 'postform.html' %}
+
+{% for post in posts %}
+<p>{{post.content}}</p>
+{% endfor %}
 
 {% endblock %}

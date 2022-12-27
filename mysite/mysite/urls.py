@@ -28,4 +28,5 @@ urlpatterns = [
     path('project/<slug:slug>',views.project),
     path('tag/<slug:slug>/',views.tagged,name="tagged"),
     path('accounts/', include('allauth.urls')),
+    #path('post/', views.post, name='post'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

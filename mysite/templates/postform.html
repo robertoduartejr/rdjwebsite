@@ -1,0 +1,29 @@
+<!-- Main Content-->
+        <main class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <p style="font-size: x-large;">Deixe seu depoimento:</p>
+                        <div class="my-5">
+
+                            <form  id="contactForm" method="POST" >
+                                <div class="form-floating ">
+                                    {% csrf_token %}
+                                    {{form.title}}
+                                    <label for="title">Título</label>
+                                    </div>
+                                <div class="form-floating ">
+                                    {{form.content}}
+                                    <label for="message">Escreva aqui...</label>
+                                </div>
+                                <br />
+                                
+                                <!-- Submit Button-->
+
+                                <div class="d-flex justify-content-left mb-4"><button class="btn btn-primary text-uppercase" type="submit">Enviar</button></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>

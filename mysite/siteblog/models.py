@@ -29,6 +29,11 @@ class Project(models.Model):
         ordering = ('-created_at',)
 
 class VisitorsPost(models.Model):
-    content = models.TextField(max_length=1000)
+    title = models.CharField(max_length=255)
+    content = models.TextField('Deixe um comentário',max_length=1000)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     project = models.ForeignKey(Project, on_delete=models.CASCADE, null=True)
+    created_at = models.DateField(default=date.today())
+
+    class Meta:
+        ordering = ('-created_at',)
