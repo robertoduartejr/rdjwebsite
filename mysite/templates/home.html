@@ -11,7 +11,7 @@
                 <div class="site-heading">
                     <h1>Roberto Duarte Junior Website</h1>
                     <span class="subheading">Desenvolvedor Full-Stack Python</span>
-                    
+
                 </div>
             </div>
         </div>
@@ -28,11 +28,11 @@
         <div class="col-md-10 col-lg-8 col-xl-7">
             <!-- Post preview-->
             <section id="mainsection">
-            {% for mt in common_tags %}
+                {% for mt in common_tags %}
             </section>
             <a class="post-meta" href="{% url 'tagged' mt.slug  %}"> #{{mt}}</a>
-                    {% endfor %}
-            
+            {% endfor %}
+
             {% for project in projects %}
             <div class="post-preview">
                 <a href="/project/{{project.slug}}">
@@ -45,8 +45,8 @@
                     {{project.created_at|date:'d, M Y'}}
                 </p>
                 {% for tag in project.tags.all %}
-                    <a class="post-meta" href="{% url 'tagged' tag.slug  %}"> #{{tag}}</a>
-                    {%endfor%}
+                <a class="post-meta" href="{% url 'tagged' tag.slug  %}"> #{{tag}}</a>
+                {%endfor%}
             </div>
             <!-- Divider-->
             <hr class="my-4" />
@@ -56,21 +56,42 @@
 
             <!-- Pager-->
             {% if hide%}
-            <div class="d-flex justify-content-center mb-4"><a class="btn btn-primary text-uppercase" href="{% url 'all'  %}">Todos Projetos ↓</a></div>
+            <div class="d-flex justify-content-center mb-4"><a class="btn btn-primary text-uppercase"
+                    href="{% url 'all'  %}">Todos Projetos ↓</a></div>
             {% else %}
-            <div class="d-flex justify-content-center mb-4"><a class="btn btn-primary text-uppercase" href="{% url 'home'  %}">Projetos Recentes ↑</a></div>
+            <div class="d-flex justify-content-center mb-4"><a class="btn btn-primary text-uppercase"
+                    href="{% url 'home'  %}">Projetos Recentes ↑</a></div>
             {%endif%}
+                <br>
 
+            <!-- POSTS-->
+            <section id="visitorposts">
+                <hr class="my-4" />
+                {% for post in posts %}
+                <div class="post-preview">
+                    <h4 class="post-title">{{post.title}}</h2>
+                        <p style="font-size: large;" class="post-subtitle">{{post.content|safe}}</p>
+                        <p class="post-meta">
+                            Depoimento realizaddo por {{post.user.username}}
+                            {{post.created_at|date:'d, M Y'}}
+                        </p>
+                </div>
+                <!-- Divider-->
+                <hr class="my-4" />
 
+                {% endfor %}
+            </section>
 
+            <div class="d-flex justify-content-center mb-4"><a class="btn btn-primary text-uppercase"
+                href="{% url 'all'  %}">Todos Depoimentos ↓</a></div>
 
+        
         </div>
     </div>
+
 </div>
+<!-- INSERIR POSTS-->
 {% include 'postform.html' %}
 
-{% for post in posts %}
-<p>{{post.content}}</p>
-{% endfor %}
 
 {% endblock %}

@@ -29,7 +29,7 @@ def home(request):
             common_tags = Project.tags.most_common()[:4]
             form = Post()
 
-            posts = VisitorsPost.objects.all()[:3]
+            posts = VisitorsPost.objects.all()
             return render(request, 'home.html',
                           {'projects': projects, 'common_tags': common_tags, 'hide': True, 'form': form,'posts':posts})
 
@@ -38,7 +38,7 @@ def home(request):
 
     projects = Project.objects.all()[:3]
     common_tags = Project.tags.most_common()[:4]
-    posts = VisitorsPost.objects.all()[:3]
+    posts = VisitorsPost.objects.all()
     form = Post()
     return render(request, 'home.html', {'projects':projects,'common_tags': common_tags, 'hide':True, 'form':form, 'posts':posts})
 
