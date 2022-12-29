@@ -25,6 +25,7 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('',views.home,name='home'),
     path('all_projects',views.all_projects,name='all'),
+    path('provide_json/<int:num_projects>',views.provide_json,name='provide_json'),
     path('project/<slug:slug>',views.project),
     path('tag/<slug:slug>/',views.tagged,name="tagged"),
     path('accounts/', include('allauth.urls')),

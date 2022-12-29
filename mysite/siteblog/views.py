@@ -3,6 +3,7 @@ from .models import Project, VisitorsPost
 from taggit.models import Tag
 from django.template.defaultfilters import slugify
 from .forms import Post
+from django.http import JsonResponse
 
 # Create your views here.
 def home(request):
@@ -34,13 +35,24 @@ def home(request):
                           {'projects': projects, 'common_tags': common_tags, 'hide': True, 'form': form,'posts':posts})
 
 
-
-
     projects = Project.objects.all()[:3]
     common_tags = Project.tags.most_common()[:4]
     posts = VisitorsPost.objects.all()
     form = Post()
     return render(request, 'home.html', {'projects':projects,'common_tags': common_tags, 'hide':True, 'form':form, 'posts':posts})
+
+def provide_json(request, *args, **kwargs):
+    print(kwargs)
+    upper = kwargs.get('num_projects')
+    lower = upper - 3
+    projects = list(Project.objects.values())[lower:upper]
+    projects_size = len(Project.objects.all())
+    size = True if upper >= projects_size else False
+    return JsonResponse({'data':projects, 'max': size}, safe=False)
+
+
+
+
 
 def all_projects(request):
     projects = Project.objects.all()

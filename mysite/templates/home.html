@@ -29,11 +29,12 @@
             <!-- Post preview-->
             <section id="mainsection">
                 {% for mt in common_tags %}
-            </section>
             <a class="post-meta" href="{% url 'tagged' mt.slug  %}"> #{{mt}}</a>
             {% endfor %}
 
-            {% for project in projects %}
+
+            <div id="projects-box">
+                {% for project in projects %}
             <div class="post-preview">
                 <a href="/project/{{project.slug}}">
                     <h2 class="post-title">{{project.title}}</h2>
@@ -44,24 +45,37 @@
                     <a href="about.html">Roberto Duarte</a>
                     {{project.created_at|date:'d, M Y'}}
                 </p>
-                {% for tag in project.tags.all %}
-                <a class="post-meta" href="{% url 'tagged' tag.slug  %}"> #{{tag}}</a>
-                {%endfor%}
+
             </div>
             <!-- Divider-->
             <hr class="my-4" />
-
+        
             {% endfor %}
+
+
+
+            </div>
+            
+            
+
+            </section>
 
 
             <!-- Pager-->
             {% if hide%}
-            <div class="d-flex justify-content-center mb-4"><a class="btn btn-primary text-uppercase"
-                    href="{% url 'all'  %}">Todos Projetos ↓</a></div>
+            <div id="loading-box" class="d-flex justify-content-center mb-4"><button id="load-btn" class="btn btn-primary text-uppercase">Mostrar mais</button></div>
             {% else %}
             <div class="d-flex justify-content-center mb-4"><a class="btn btn-primary text-uppercase"
                     href="{% url 'home'  %}">Projetos Recentes ↑</a></div>
             {%endif%}
+
+            <div class="d-flex justify-content-center">
+                <div id="spinner-box" class="not-visible">
+                    <div class="spinner-border text-info" role="status">
+                      </div>
+                </div>
+                </div>
+
                 <br>
 
             <!-- POSTS-->
@@ -72,7 +86,7 @@
                     <h4 class="post-title">{{post.title}}</h2>
                         <p style="font-size: large;" class="post-subtitle">{{post.content|safe}}</p>
                         <p class="post-meta">
-                            Depoimento realizaddo por {{post.user.username}}
+                            Depoimento realizado por {{post.user.username}}
                             {{post.created_at|date:'d, M Y'}}
                         </p>
                 </div>
