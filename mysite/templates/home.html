@@ -63,7 +63,7 @@
 
             <!-- Pager-->
             {% if hide%}
-            <div id="loading-box" class="d-flex justify-content-center mb-4"><button id="load-btn" class="btn btn-primary text-uppercase">Mostrar mais</button></div>
+            <div id="loading-box"><div class="d-flex justify-content-center mb-4"><button onclick="ShowMore()" id="load-btn" class="btn btn-primary text-uppercase">Mostrar mais</button></div></div>
             {% else %}
             <div class="d-flex justify-content-center mb-4"><a class="btn btn-primary text-uppercase"
                     href="{% url 'home'  %}">Projetos Recentes ↑</a></div>
