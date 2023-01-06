@@ -26,6 +26,8 @@ urlpatterns = [
     path('',views.home,name='home'),
     path('all_projects',views.all_projects,name='all'),
     path('provide_json/<int:num_projects>',views.provide_json,name='provide_json'),
+    path('provide_json_posts/<int:num_posts>',views.provide_json_posts,name='provide_json_posts'),
+    path('provide_json_users/',views.provide_json_users,name='provide_json_users'),
     path('project/<slug:slug>',views.project),
     path('tag/<slug:slug>/',views.tagged,name="tagged"),
     path('accounts/', include('allauth.urls')),

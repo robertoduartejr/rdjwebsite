@@ -29,58 +29,32 @@
             <!-- Post preview-->
             <section id="mainsection">
                 {% for mt in common_tags %}
-            <a class="post-meta" href="{% url 'tagged' mt.slug  %}"> #{{mt}}</a>
-            {% endfor %}
+                <a class="post-meta" href="{% url 'tagged' mt.slug  %}"> #{{mt}}</a>
+                {% endfor %}
 
-
-            <div id="projects-box">
-                {% for project in projects %}
-            <div class="post-preview">
-                <a href="/project/{{project.slug}}">
-                    <h2 class="post-title">{{project.title}}</h2>
-                    <h3 class="post-subtitle">{{project.summary|safe}}</h3>
-                </a>
-                <p class="post-meta">
-                    Realizaddo por
-                    <a href="about.html">Roberto Duarte</a>
-                    {{project.created_at|date:'d, M Y'}}
-                </p>
-
-            </div>
-            <!-- Divider-->
-            <hr class="my-4" />
-        
-            {% endfor %}
-
-
-
-            </div>
-            
-            
+                <div id="projects-box"></div>
 
             </section>
 
 
             <!-- Pager-->
-            {% if hide%}
-            <div id="loading-box"><div class="d-flex justify-content-center mb-4"><button onclick="ShowMore()" id="load-btn" class="btn btn-primary text-uppercase">Mostrar mais</button></div></div>
-            {% else %}
-            <div class="d-flex justify-content-center mb-4"><a class="btn btn-primary text-uppercase"
-                    href="{% url 'home'  %}">Projetos Recentes ↑</a></div>
-            {%endif%}
+            <div id="loading-box">
+                <div class="d-flex justify-content-center mb-4"><button onclick="ShowMore()" id="load-btn"
+                        class="btn btn-primary text-uppercase">Mostrar mais</button></div>
+            </div>
 
             <div class="d-flex justify-content-center">
                 <div id="spinner-box" class="not-visible">
                     <div class="spinner-border text-info" role="status">
-                      </div>
+                    </div>
                 </div>
-                </div>
+            </div>
 
-                <br>
+            <br>
 
-            <!-- POSTS-->
+            
+            <!-- POSTS
             <section id="visitorposts">
-                <hr class="my-4" />
                 {% for post in posts %}
                 <div class="post-preview">
                     <h4 class="post-title">{{post.title}}</h2>
@@ -89,17 +63,28 @@
                             Depoimento realizado por {{post.user.username}}
                             {{post.created_at|date:'d, M Y'}}
                         </p>
+                </div> -->
+                <!-- Divider--> 
+                <!--<hr class="my-4" />
+
+                {% endfor %}--> 
+                
+
+                <section id="visitorposts">
+                <div id="posts-box"></div>
+                <div id="loading-box-posts">
+                <div class="d-flex justify-content-center mb-4"><button onclick="ShowMorePosts()" id="load-btn-posts"
+                    class="btn btn-primary text-uppercase">Mostrar mais</button></div>
                 </div>
-                <!-- Divider-->
-                <hr class="my-4" />
 
-                {% endfor %}
+                    <div class="d-flex justify-content-center">
+                        <div id="spinner-box-posts" class="not-visible">
+                            <div class="spinner-border text-info" role="status">
+                            </div>
+                        </div>
+                    </div>
+
             </section>
-
-            <div class="d-flex justify-content-center mb-4"><a class="btn btn-primary text-uppercase"
-                href="{% url 'all'  %}">Todos Depoimentos ↓</a></div>
-
-        
         </div>
     </div>
 

@@ -4,6 +4,7 @@ from taggit.models import Tag
 from django.template.defaultfilters import slugify
 from .forms import Post
 from django.http import JsonResponse
+from django.contrib.auth.models import User
 
 # Create your views here.
 def home(request):
@@ -51,6 +52,19 @@ def provide_json(request, *args, **kwargs):
     return JsonResponse({'data':projects, 'max': size}, safe=False)
 
 
+def provide_json_posts(request, *args, **kwargs):
+    print(kwargs)
+    upper = kwargs.get('num_posts')
+    lower = upper - 3
+    posts = list(VisitorsPost.objects.values())[lower:upper]
+    posts_size = len(VisitorsPost.objects.all())
+    size = True if upper >= posts_size else False
+    return JsonResponse({'data':posts, 'max': size}, safe=False)
+
+def provide_json_users(request):
+
+    users = list(User.objects.values('id','first_name','last_name'))
+    return JsonResponse({'data': users}, safe=False)
 
 
 

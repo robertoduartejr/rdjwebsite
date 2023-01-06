@@ -20,7 +20,9 @@ const ShowLess = () => {
     loadBox.classList.remove("not-visible");
 
     handleGetData();
-    document.getElementById("mainsection").scrollIntoView({behavior: 'smooth'});
+    document
+      .getElementById("mainsection")
+      .scrollIntoView({ behavior: "smooth" });
   }, 500);
 };
 
@@ -31,6 +33,9 @@ const handleGetData = () => {
     response.json().then((data) => {
       max_size = data.max;
       const projects = data.data;
+      const teste = projects[user_id=1].title
+      console.log(teste)
+      console.log("AQUIIIIII");
       spinnerBox.classList.remove("not-visible");
       setTimeout(() => {
         spinnerBox.classList.add("not-visible");
@@ -60,6 +65,7 @@ const handleGetData = () => {
             " " +
             newDate.getFullYear();
           projectsBox.innerHTML += `
+          <hr class="my-4" />
             <div class="post-preview">
                 <a href="/project/${project.slug}">
                     <h2 class="post-title">${project.title}</h2>
@@ -78,6 +84,7 @@ const handleGetData = () => {
       if (max_size) {
         loadBox.classList.add("not-visible");
         console.log("done");
+        console.log("AQUIIIIII");
 
         setTimeout(() => {
           projectsBox.innerHTML += `
