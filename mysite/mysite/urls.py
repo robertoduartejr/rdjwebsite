@@ -14,22 +14,31 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include,re_path
 from django.conf.urls.static import static
 from django.conf import settings
 from siteblog import views
+from django.views.static import serve
+
+handler404 = 'siteblog.views.custom_page_not_found_view'
+handler500 = 'siteblog.views.custom_error_view'
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('',views.home,name='home'),
-    path('all_projects',views.all_projects,name='all'),
     path('provide_json/<int:num_projects>',views.provide_json,name='provide_json'),
-    path('provide_json_posts/<int:num_posts>',views.provide_json_posts,name='provide_json_posts'),
+    path('provide_json_posts/<int:num_posts>/<slug:slug>',views.provide_json_posts, name='provide_json_posts'),
     path('provide_json_users/',views.provide_json_users,name='provide_json_users'),
     path('project/<slug:slug>',views.project),
     path('tag/<slug:slug>/',views.tagged,name="tagged"),
     path('accounts/', include('allauth.urls')),
+    re_path(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
+    re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
     #path('post/', views.post, name='post'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+
+

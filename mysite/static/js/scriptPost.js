@@ -3,7 +3,9 @@ const postsBox = document.getElementById("posts-box");
 const spinnerBoxPost = document.getElementById("spinner-box-posts");
 const loadBoxPost = document.getElementById("loading-box-posts");
 const loadBtnPost = document.getElementById("load-btn-posts");
-
+const mySlug = document.getElementById("mySlug").value;
+console.log("mais um teste")
+console.log(mySlug)
 
 fetch("/provide_json_users").then((response) =>
     response.json().then((data) => { 
@@ -37,7 +39,7 @@ const ShowLessPosts = () => {
 let visiblePost = 3;
 
 const handleGetDataPosts = () => {
-  fetch(`/provide_json_posts/${visiblePost}`).then((response) =>
+  fetch(`/provide_json_posts/${visiblePost}/${mySlug}`).then((response) =>
     response.json().then((data) => {
       max_size = data.max;
       const posts = data.data;
@@ -46,7 +48,6 @@ const handleGetDataPosts = () => {
         spinnerBoxPost.classList.add("not-visible");
         posts.map((post) => {
           console.log(post.title);
-          var selected_date = post.created_at;
           var right_user = post.user_id;
           author = users.filter((x)=>x.id === right_user)[0]
 
@@ -67,7 +68,7 @@ const handleGetDataPosts = () => {
           ];
           var newDate = new Date(post.created_at);
           var formattedDate =
-            newDate.getDay() +
+            newDate.getDate() +
             ", " +
             monthNames[newDate.getMonth()] +
             " " +

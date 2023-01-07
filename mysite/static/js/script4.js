@@ -1,8 +1,10 @@
 console.log("script3");
+
 const projectsBox = document.getElementById("projects-box");
 const spinnerBox = document.getElementById("spinner-box");
 const loadBox = document.getElementById("loading-box");
 const loadBtn = document.getElementById("load-btn");
+
 
 const ShowMore = () => {
   visible += 3;
@@ -59,7 +61,7 @@ const handleGetData = () => {
           ];
           var newDate = new Date(project.created_at);
           var formattedDate =
-            newDate.getDay() +
+            newDate.getDate() +
             ", " +
             monthNames[newDate.getMonth()] +
             " " +

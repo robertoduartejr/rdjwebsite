@@ -30,31 +30,33 @@
 
 {% block content %}
 
+
 <article class="mb-4">
             <div class="container px-4 px-lg-5" id="Project">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
-                        <h2 class="subheading">Descrição</h2>
-                        <p>{{project.content|safe}}</p>
-                        <h2 class="subheading">Aprendizados</h2>
-                        <p>{{project.learning|safe}}</p>
-
                         
-                        <p>{{project.programming_languages|safe}}</p>
-                        
-                        <div class="post-preview">
-                        <a class="post-meta" href="/project/{{project.pk}}">
-                            <b>➔ Repositório GitHub</b>
-                        </a>
-                        <br>
-                        <a class="post-meta" href="/project/{{project.pk}}">
-                             <b>➔ Deploy</b>
-                        </a>
-                    </div>
-                    </div>
+        
+                        <section id="visitorposts">
+                        <div id="posts-box"></div>
+                        <div id="loading-box-posts">
+                        <div class="d-flex justify-content-center mb-4"><button onclick="ShowMorePosts()" id="load-btn-posts"
+                            class="btn btn-primary text-uppercase">Mostrar mais</button></div>
+                        </div>
+        
+                            <div class="d-flex justify-content-center">
+                                <div id="spinner-box-posts" class="not-visible">
+                                    <div class="spinner-border text-info" role="status">
+                                    </div>
+                                </div>
+                            </div>
+        
+                    </section>
                 </div>
             </div>
-        </article>
+        
+        </div>
+        <input type="hidden" id="mySlug" name="variable" value="{{ project.slug }}">
 
-
+        {% include 'postform.html' %}
 {% endblock %}
