@@ -68,7 +68,7 @@ const handleGetDataPosts = () => {
           ];
           var newDate = new Date(post.created_at);
           var formattedDate =
-            newDate.getDate() +
+            (newDate.getDate()+1) +
             ", " +
             monthNames[newDate.getMonth()] +
             " " +
