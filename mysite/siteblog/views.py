@@ -10,6 +10,7 @@ from datetime import date
 # Create your views here.
 def home(request):
     print(date.today())
+    slug = "nao-existe" #slug qualquer pra fazer chamada
     if request.method == "POST":
         form = Post(request.POST)
         if form.is_valid():
@@ -34,23 +35,37 @@ def home(request):
 
             posts = VisitorsPost.objects.all()
             return render(request, 'home.html',
-                          {'common_tags': common_tags, 'hide': True, 'form': form,'posts':posts})
+                          {'common_tags': common_tags, 'hide': True, 'form': form,'posts':posts, 'slug':slug}) #envio um slug qualquer pra fazer chamada
 
 
     projects = Project.objects.all()[:3]
     common_tags = Project.tags.most_common()[:4]
     posts = VisitorsPost.objects.all()
     form = Post()
-    return render(request, 'home.html', {'projects':projects,'common_tags': common_tags, 'hide':True, 'form':form, 'posts':posts})
+    return render(request, 'home.html', {'projects':projects,'common_tags': common_tags, 'hide':True, 'form':form, 'posts':posts, 'slug':slug}) #envio um slug qualquer pra fazer chamada
 
 def provide_json(request, *args, **kwargs):
     print(kwargs)
     upper = kwargs.get('num_projects')
     lower = upper - 3
-    projects = list(Project.objects.values())[lower:upper]
-    projects_size = len(Project.objects.all())
-    size = True if upper >= projects_size else False
-    return JsonResponse({'data':projects, 'max': size}, safe=False)
+    slug = kwargs.get('slug')
+    print("TEM Q CHEGAR AQUI")
+    try: #utilizei o try pra proteger a pagina principal. Pagina principal não tem tag, então a função get object abaixo nao acharia nada e daria um erro.
+        tag = get_object_or_404(Tag, slug=slug)  # get specific tag by its slug
+        projects = Project.objects.filter(tags=tag)[lower:upper]
+        print(projects,"OQ ROLA AQUI")
+
+        projects = list(Project.objects.filter(tags=tag).values())[lower:upper]
+        projects_size = len(Project.objects.all())
+        size = True if upper >= projects_size else False
+        return JsonResponse({'data':projects, 'max': size}, safe=False)
+
+    except:
+        print("testando se entrou aqui")
+        projects = list(Project.objects.values())[lower:upper]
+        projects_size = len(Project.objects.all())
+        size = True if upper >= projects_size else False
+        return JsonResponse({'data': projects, 'max': size}, safe=False)
 
 def provide_json_posts(request, *args, **kwargs):
     print(kwargs)
@@ -112,7 +127,9 @@ def tagged(request,slug):
     tag = get_object_or_404(Tag, slug=slug) #get specific tag by its slug
     projects = Project.objects.filter(tags=tag)
     common_tags = Project.tags.most_common()[:4]
-    return render(request, 'home.html', {'projects': projects, 'tag': tag, 'common_tags':common_tags})
+    print(slug)
+    slug = slug
+    return render(request, 'home.html', {'projects': projects, 'tag': tag, 'common_tags':common_tags, 'slug':slug})
 
 
 #functions to handle 404 and 500 errors

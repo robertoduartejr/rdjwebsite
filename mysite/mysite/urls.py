@@ -28,7 +28,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('',views.home,name='home'),
-    path('provide_json/<int:num_projects>',views.provide_json,name='provide_json'),
+    path('provide_json/<int:num_projects>/<slug:slug>',views.provide_json,name='provide_json'),
     path('provide_json_posts/<int:num_posts>/<slug:slug>',views.provide_json_posts, name='provide_json_posts'),
     path('provide_json_users/',views.provide_json_users,name='provide_json_users'),
     path('project/<slug:slug>',views.project),

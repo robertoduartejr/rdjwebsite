@@ -4,6 +4,9 @@ const projectsBox = document.getElementById("projects-box");
 const spinnerBox = document.getElementById("spinner-box");
 const loadBox = document.getElementById("loading-box");
 const loadBtn = document.getElementById("load-btn");
+const mySlug2 = document.getElementById("mySlug2").value;
+console.log("funcionou ou n?")
+console.log(mySlug2)
 
 
 const ShowMore = () => {
@@ -31,12 +34,10 @@ const ShowLess = () => {
 let visible = 3;
 
 const handleGetData = () => {
-  fetch(`/provide_json/${visible}`).then((response) =>
+  fetch(`/provide_json/${visible}/${mySlug2}`).then((response) =>
     response.json().then((data) => {
       max_size = data.max;
       const projects = data.data;
-      const teste = projects[user_id=1].title
-      console.log(teste)
       console.log("AQUIIIIII");
       spinnerBox.classList.remove("not-visible");
       setTimeout(() => {
