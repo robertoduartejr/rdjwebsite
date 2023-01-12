@@ -33,6 +33,7 @@ urlpatterns = [
     path('provide_json_users/',views.provide_json_users,name='provide_json_users'),
     path('project/<slug:slug>',views.project),
     path('tag/<slug:slug>/',views.tagged,name="tagged"),
+    path('downloadfile/',views.downloadfile,name="downloadfile"),
     path('accounts/', include('allauth.urls')),
     re_path(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
     re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),

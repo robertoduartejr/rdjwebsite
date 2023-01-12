@@ -1,27 +1,82 @@
 <!-- Main Content-->
-        <main class="mb-4">
-            <div class="container px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-md-10 col-lg-8 col-xl-7">
-                        <br>
-                            <form  id="contactForm" method="POST" >
-                                <p style="font-size: x-large;">Deixe seu depoimento:</p>
-                                <div class="form-floating ">
-                                    {% csrf_token %}
-                                    {{form.title}}
-                                    <label for="title">Título</label>
-                                    </div>
-                                <div class="form-floating ">
-                                    {{form.content}}
-                                    <label for="message">Escreva aqui...</label>
-                                </div>
-                                <br />
-                                
-                                <!-- Submit Button-->
+<main class="mb-4">
+  <div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <br />
+        <form id="contactForm" method="POST">
+          <p style="font-size: x-large">Deixe seu depoimento:</p>
+          <div class="form-floating">
+            {% csrf_token %} {{form.title}}
+            <label for="title">Título</label>
+          </div>
+          <div class="form-floating">
+            {{form.content}}
+            <label for="message">Escreva aqui...</label>
+          </div>
+          <br />
 
-                                <div class="d-flex justify-content-left mb-4"><button class="btn btn-primary text-uppercase" type="submit">Enviar</button></div>
-                            </form>
-                    </div>
-                </div>
+          <!-- Submit Button-->
+          {% if request.user.is_authenticated%}
+          <div class="d-flex justify-content-left mb-4">
+            <button class="btn btn-primary text-uppercase" type="submit">
+              Enviar
+            </button>
+          </div>
+          
+            <a  href="https://www.linkedin.com/in/robertoduartejr/" target="_blank">
+            <ul class="list-inline text-center">
+              <li>
+                <b>Logout</b>
+                <i class="fa fa-sign-out" aria-hidden="true"></i>
+              </li>
+            </a>
+            </ul>
+          
+          {%else%}
+          <div class="d-flex justify-content-left mb-4">
+            <button
+              class="btn btn-primary text-uppercase disabled"
+              type="submit"
+            >
+              Enviar
+            </button>
+          </div>
+        </form>
+
+        <div class="container px-4 px-lg-5" div="Project">
+          <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="small text-center text-muted">
+              Log in abaixo para enviar depoimento:
             </div>
-        </main>
+            <div class="col-md-10 col-lg-8 col-xl-7">
+              <ul class="list-inline text-center">
+                <li class="list-inline-item">
+                  <a
+                    href="https://www.linkedin.com/in/robertoduartejr/"
+                    target="_blank"
+                  >
+                    <span class="fa-stack fa-lg">
+                      <i class="fas fa-square fa-stack-2x"></i>
+                      <i class="fab fa-google fa-stack-1x fa-inverse"></i>
+                    </span>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#!" target="_blank">
+                    <span class="fa-stack fa-lg">
+                      <i class="fas fa-square fa-stack-2x"></i>
+                      <i class="fab fa-linkedin-in fa-stack-1x fa-inverse"></i>
+                      <i class="bi bi-badge-4k-fill"></i>
+                    </span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        {%endif%}
+      </div>
+    </div>
+  </div>
+</main>

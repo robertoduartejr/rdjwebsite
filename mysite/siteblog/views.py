@@ -1,11 +1,15 @@
+import os.path
+
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Project, VisitorsPost
 from taggit.models import Tag
 from django.template.defaultfilters import slugify
 from .forms import Post
-from django.http import JsonResponse
+from django.http import JsonResponse, StreamingHttpResponse
 from django.contrib.auth.models import User
 from datetime import date
+from wsgiref.util import FileWrapper
+import mimetypes
 
 # Create your views here.
 def home(request):
@@ -43,6 +47,18 @@ def home(request):
     posts = VisitorsPost.objects.all()
     form = Post()
     return render(request, 'home.html', {'projects':projects,'common_tags': common_tags, 'hide':True, 'form':form, 'posts':posts, 'slug':slug}) #envio um slug qualquer pra fazer chamada
+
+def downloadfile(request):
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    filename = 'CV - Roberto Duarte.pdf'
+    thefile = base_dir + '\\static\\files\\' + filename
+    filename = os.path.basename(thefile)
+    chunck_size = 8192
+    response = StreamingHttpResponse(FileWrapper(open(thefile,'rb'),chunck_size),content_type=mimetypes.guess_type(thefile)[0])
+    response['Content-Length'] = os.path.getsize(thefile)
+    response['Content-Disposition'] = "Attachment;filename=%s" % filename
+    return response
+
 
 def provide_json(request, *args, **kwargs):
     print(kwargs)
@@ -129,7 +145,8 @@ def tagged(request,slug):
     common_tags = Project.tags.most_common()[:4]
     print(slug)
     slug = slug
-    return render(request, 'home.html', {'projects': projects, 'tag': tag, 'common_tags':common_tags, 'slug':slug})
+    form = Post()
+    return render(request, 'home.html', {'projects': projects, 'tag': tag, 'common_tags':common_tags, 'slug':slug, 'form':form})
 
 
 #functions to handle 404 and 500 errors
