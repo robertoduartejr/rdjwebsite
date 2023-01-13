@@ -170,3 +170,9 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/assets/media')
 
 CKEDITOR_UPLOAD_PATH = 'uploads/'
+
+#login redirect
+
+LOGIN_REDIRECT_URL = '/'
+
+SOCIALACCOUNT_LOGIN_ON_GET=True
